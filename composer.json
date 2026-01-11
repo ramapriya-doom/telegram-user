@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Ramapriya\\Telegram\\User\\": "src"
+        }
+    },
+    "require": {
+        "symfony/dotenv": "^v8.0.0"
+    }
+}
