@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "symfony/dotenv": "^v8.0.0"
+        "symfony/dotenv": "^v8.0.0",
+        "monolog/monolog": ">=3.10.0"
     }
 }
