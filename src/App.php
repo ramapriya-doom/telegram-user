@@ -36,13 +36,15 @@ class App
         $json = file_get_contents('php://input');
         $this->update = json_decode($json, true);
 
-        $this->logger->debug('webhook update', $this->update);
+        foreach ($this->update as $key => $value) {
+            if ($key === 'update_id') {
+                continue;
+            }
 
-        $this->payload = match (true) {
-            array_key_exists('message', $this->update) => $this->update['message'],
-            array_key_exists('callback_query', $this->update) => $this->update['callback_query'],
-            array_key_exists('business_message', $this->update) => $this->update['business_message'],
-        };
+            if (is_array($value)) {
+                $this->payload = $value;
+            }
+        }
 
         $this->dto = new DTO(
             $this->payload['from']['id'],
