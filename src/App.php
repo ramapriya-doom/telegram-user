@@ -25,8 +25,8 @@ class App
         $this->env->loadEnv($this->envFilePath);
 
         $this->db = new Database($_ENV['USER_TABLE_NAME']);
-        $this->logger = new Logger(__CLASS__);
-        $this->logger->pushHandler(new StreamHandler($_SERVER['DOCUMENT_ROOT'] . '/logs/app.log'));
+        $this->logger = new Logger('telegram user');
+        $this->logger->pushHandler(new StreamHandler($_SERVER['DOCUMENT_ROOT'] . '/logs/telegram_user.log'));
 
         $this->parseUpdate();
     }
