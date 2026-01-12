@@ -10,18 +10,25 @@ class DTO
         public readonly ?string $lastName = null,
         public readonly ?string $username = null,
         public readonly ?string $languageCode = null,
+        public readonly ?int $botId = null,
     )
     {
     }
 
-    public function toArray(): array
+    public function toArray(bool $toUpper = false): array
     {
-        return [
+        $array = [
             'id' => $this->id,
             'first_name' => $this->firstName,
             'last_name' => $this->lastName,
             'username' => $this->username,
             'language_code' => $this->languageCode,
         ];
+
+        if ($this->botId !== null) {
+            $array['bot_id'] = $this->botId;
+        }
+
+        return $toUpper ? array_change_key_case($array, CASE_UPPER) : $array;
     }
 }

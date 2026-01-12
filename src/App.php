@@ -52,6 +52,7 @@ class App
             $this->payload['from']['last_name'] ?? null,
             $this->payload['from']['username'] ?? null,
             $this->payload['from']['language_code'] ?? null,
+            $this->getBotId()
         );
     }
 
@@ -69,6 +70,16 @@ class App
         } catch (\Throwable $e) {
             $this->logger->error($e->getMessage(), [$e->getTraceAsString()]);
         }
+    }
+
+    private function getBotId(): ?int
+    {
+        if (!array_key_exists('BOT_TOKEN', $_ENV)) {
+            return null;
+        }
+
+        [$botId,] = explode(':', $_ENV['BOT_TOKEN']);
+        return (int)$botId ?: null;
     }
 
 }
