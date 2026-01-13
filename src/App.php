@@ -57,7 +57,7 @@ class App
 
     public function saveUser(): void
     {
-        $existing = $this->db->find(['id' => $this->dto->id], ['id']);
+        $existing = $this->db->find(['id' => $this->dto->id]);
 
         if (!empty($existing)) {
             $this->logger->debug('user exists', current($existing));
