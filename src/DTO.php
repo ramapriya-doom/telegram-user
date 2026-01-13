@@ -9,8 +9,7 @@ class DTO
         public readonly string $firstName,
         public readonly ?string $lastName = null,
         public readonly ?string $username = null,
-        public readonly ?string $languageCode = null,
-        public readonly ?int $botId = null,
+        public readonly ?string $languageCode = null
     )
     {
     }
@@ -24,10 +23,6 @@ class DTO
             'username' => $this->username,
             'language_code' => $this->languageCode,
         ];
-
-        if ($this->botId !== null) {
-            $array['bot_id'] = $this->botId;
-        }
 
         return $toUpper ? array_change_key_case($array, CASE_UPPER) : $array;
     }

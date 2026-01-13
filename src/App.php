@@ -51,8 +51,7 @@ class App
             $this->payload['from']['first_name'],
             $this->payload['from']['last_name'] ?? null,
             $this->payload['from']['username'] ?? null,
-            $this->payload['from']['language_code'] ?? null,
-            $this->getBotId()
+            $this->payload['from']['language_code'] ?? null
         );
     }
 
@@ -65,21 +64,13 @@ class App
             return;
         }
 
+        $toUpper = $_ENV['USER_TABLE_NAME'] !== 'users';
+
         try {
-            $this->db->save($this->dto->toArray());
+            $this->db->save($this->dto->toArray($toUpper));
         } catch (\Throwable $e) {
             $this->logger->error($e->getMessage(), [$e->getTraceAsString()]);
         }
-    }
-
-    private function getBotId(): ?int
-    {
-        if (!array_key_exists('BOT_TOKEN', $_ENV)) {
-            return null;
-        }
-
-        [$botId,] = explode(':', $_ENV['BOT_TOKEN']);
-        return (int)$botId ?: null;
     }
 
 }
